@@ -4,20 +4,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RootLayout from "./pages/Root";
 import { Provider } from "react-redux";
 import store from "./store";
+import HomePage from "./pages/Home";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-  },
-]);
+const App = () => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RootLayout />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+      ],
+    },
+  ]);
 
-function App() {
   return (
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
   );
-}
+};
 
 export default App;

@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Stack } from "react-bootstrap";
-import classes from "./Header.module.css";
 import { List } from "react-bootstrap-icons";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,12 +17,12 @@ const Header = () => {
   };
 
   return (
-    <header className={classes.header}>
+    <header className="p-3 bg-dark">
       <Stack direction="horizontal">
         <Button
           variant="secondary"
           onClick={openMenuHandler}
-          className={classes["burger-menu-btn"]}
+          className="d-flex p-2"
         >
           <List size={24} />
         </Button>
