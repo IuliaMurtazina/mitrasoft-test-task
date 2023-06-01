@@ -15,7 +15,7 @@ export const loadCommentsStatus = {
 };
 
 const initialState = {
-  comments: [],
+  comments: {},
   status: "",
   errorMessage: "",
 };
@@ -47,3 +47,8 @@ export const {
   LOAD_COMMENTS_ERROR,
 } = commentsSlice.actions;
 export default commentsSlice.reducer;
+
+// SELECTORS
+
+export const selectIsCurrentComments = (state, postId) =>
+  !!state.comments.comments[postId];

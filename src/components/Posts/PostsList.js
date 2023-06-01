@@ -4,13 +4,13 @@ import { Spinner, Stack } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { loadPostsStatus } from "../../store/reducers/posts";
 
-const PostsList = () => {
-  const { posts, status, errorMessage } = useSelector((state) => state.posts);
-  
+const PostsList = ({ posts }) => {
+  const { status, errorMessage } = useSelector((state) => state.posts);
+
   return (
     <>
       {status === loadPostsStatus.LOADING && <Spinner className="mx-auto" />}
-      {status === loadPostsStatus.SUCCESS && (
+      {posts && (
         <Stack
           direction="horizontal"
           className="flex-wrap justify-content-center"

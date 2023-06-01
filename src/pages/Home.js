@@ -7,13 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 const HomePage = () => {
   const dispatch = useDispatch();
 
+  const { allPosts } = useSelector((state) => state.posts);
+
+
   useEffect(() => {
-    dispatch(loadPosts());
-  }, []);
+    if (allPosts.length === 0) {
+      dispatch(loadPosts());
+    }
+  }, [allPosts]);
 
   return (
     <PageContent title="Все посты">
-      <PostsList />
+      <PostsList posts={allPosts} />
     </PageContent>
   );
 };

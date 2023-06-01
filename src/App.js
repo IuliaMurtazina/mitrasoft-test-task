@@ -5,6 +5,7 @@ import RootLayout from "./pages/Root";
 import { Provider } from "react-redux";
 import store from "./store";
 import HomePage from "./pages/Home";
+import UserPage from "./pages/User";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const App = () => {
           index: true,
           element: <HomePage />,
         },
+        { path: "user/:userId", element: <UserPage /> },
       ],
     },
   ]);

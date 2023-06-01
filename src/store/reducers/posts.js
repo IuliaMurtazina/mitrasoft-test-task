@@ -1,13 +1,10 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
+import { createSlice, createAction, current } from "@reduxjs/toolkit";
 
 export const reducerPrefix = "posts";
 
 // ACTIONS
 
 export const loadPosts = createAction(`${reducerPrefix}/LOAD_POSTS`);
-export const loadPostComments = createAction(
-  `${reducerPrefix}/LOAD_POST_COMMENTS`,
-);
 
 // REDUCER
 
@@ -18,7 +15,8 @@ export const loadPostsStatus = {
 };
 
 const initialState = {
-  posts: [],
+  allPosts: [],
+  userPosts: {},
   status: "",
   errorMessage: "",
 };
@@ -30,8 +28,15 @@ const postsSlice = createSlice({
     LOAD_POSTS_LOADING: (state) => {
       state.status = loadPostsStatus.LOADING;
     },
-    LOAD_POSTS_SUCCESS: (state, action) => {
-      state.posts = action.payload;
+    LOAD_POSTS_SUCCESS: (state, { payload }) => {
+      if (payload.userId) {
+        state.userPosts = {
+          ...state.userPosts,
+          [`userId=${payload.userId}`]: payload.posts,
+        };
+      } else {
+        state.allPosts = payload.posts;
+      }
       state.status = loadPostsStatus.SUCCESS;
     },
     LOAD_POSTS_ERROR: (state, action) => {
@@ -41,12 +46,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const {
-  LOAD_POSTS_LOADING,
-  LOAD_POSTS_SUCCESS,
-  LOAD_POSTS_ERROR,
-  LOAD_POST_COMMENTS_LOADING,
-  LOAD_POST_COMMENTS_SUCCESS,
-  LOAD_POST_COMMENTS_ERROR,
-} = postsSlice.actions;
+export const { LOAD_POSTS_LOADING, LOAD_POSTS_SUCCESS, LOAD_POSTS_ERROR } =
+  postsSlice.actions;
 export default postsSlice.reducer;

@@ -28,14 +28,12 @@ const uiSlice = createSlice({
         ...state.isCommentsOpen,
         [action.payload]: true,
       };
-      console.log(current(state));
     },
     SET_COMMENTS_CLOSE: (state, action) => {
       state.isCommentsOpen = {
         ...state.isCommentsOpen,
         [action.payload]: false,
       };
-      console.log(current(state));
     },
   },
 });
@@ -47,3 +45,8 @@ export const {
   SET_COMMENTS_CLOSE,
 } = uiSlice.actions;
 export default uiSlice.reducer;
+
+// SELECTORS
+
+export const selectIsCommentsOpen = (state, postId) =>
+  state.ui.isCommentsOpen[postId];

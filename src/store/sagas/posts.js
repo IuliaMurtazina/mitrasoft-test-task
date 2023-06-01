@@ -9,12 +9,18 @@ import {
 
 // WORKERS
 
-function* loadPostsWorker() {
+function* loadPostsWorker({ payload }) {
   try {
     yield put(LOAD_POSTS_LOADING());
-    const { data } = yield call(() => axiosInstance.get("posts"));
+    const { data } = yield call(() =>
+      axiosInstance.get("posts", {
+        params: {
+          ...payload,
+        },
+      }),
+    );
     yield delay(500);
-    yield put(LOAD_POSTS_SUCCESS(data));
+    yield put(LOAD_POSTS_SUCCESS({posts: data, userId: payload?.userId}));
   } catch (error) {
     yield delay(500);
     yield put(LOAD_POSTS_ERROR("Не удалось загрузить список постов"));

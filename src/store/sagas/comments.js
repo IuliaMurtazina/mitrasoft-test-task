@@ -6,14 +6,12 @@ import {
   LOAD_COMMENTS_ERROR,
   loadComments,
 } from "../reducers/comments";
-import { SET_COMMENTS_OPEN } from "../reducers/ui";
 
 // WORKERS
 
 function* loadCommentsWorker({ payload }) {
   const postId = payload;
   try {
-    yield put(SET_COMMENTS_OPEN(postId));
     yield put(LOAD_COMMENTS_LOADING());
     const { data } = yield call(() => axiosInstance.get(`comments?${postId}`));
     yield delay(500);
