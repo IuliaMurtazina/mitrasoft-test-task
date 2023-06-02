@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadPosts } from "../store/reducers/posts";
 import { Button } from "react-bootstrap";
 import { ArrowLeft } from "react-bootstrap-icons";
+import { loadUser } from "../store/reducers/users";
+import UserInfo from "../components/UserInfo/UserInfo";
 
 const UserPage = () => {
   const params = useParams();
@@ -16,10 +18,16 @@ const UserPage = () => {
   const posts = useSelector(
     (state) => state.posts.userPosts[`userId=${userId}`],
   );
+  const currentUser = useSelector(
+    (state) => state.users.users[`user-${userId}`],
+  );
 
   useEffect(() => {
-    if (!posts || posts.length === 0 ) dispatch(loadPosts({ userId: userId }));
-  }, [posts]);
+    if (!posts || posts.length === 0) dispatch(loadPosts({ userId: userId }));
+    dispatch(loadUser(userId));
+  }, []);
+
+  console.log(currentUser);
 
   return (
     <PageContent title={`Пользователь №${userId}`}>
@@ -32,6 +40,7 @@ const UserPage = () => {
       >
         <ArrowLeft /> Назад
       </Button>
+      <UserInfo user={currentUser} />
       <PostsList posts={posts} />
     </PageContent>
   );

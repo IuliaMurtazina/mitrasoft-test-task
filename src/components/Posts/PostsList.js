@@ -5,18 +5,21 @@ import { useSelector } from "react-redux";
 import { loadPostsStatus } from "../../store/reducers/posts";
 
 const PostsList = ({ posts }) => {
-  const { status, errorMessage } = useSelector((state) => state.posts);
+  const { status, errorMessage, filteredPosts, isSearching } = useSelector(
+    (state) => state.posts,
+  );
+  const postsToShow = isSearching ? filteredPosts : posts;
 
   return (
     <>
       {status === loadPostsStatus.LOADING && <Spinner className="mx-auto" />}
-      {posts && (
+      {postsToShow && (
         <Stack
           direction="horizontal"
           className="flex-wrap justify-content-center"
           gap={3}
         >
-          {posts.map((post) => (
+          {postsToShow.map((post) => (
             <PostItem
               key={post.id}
               id={post.id}

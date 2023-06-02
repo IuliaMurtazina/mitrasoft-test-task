@@ -1,6 +1,6 @@
-import { createSlice, createAction } from "@reduxjs/toolkit";
+import { createSlice, createAction, current } from "@reduxjs/toolkit";
 
-export const reducerPrefix = "posts";
+export const reducerPrefix = "users";
 
 // ACTIONS
 
@@ -21,9 +21,24 @@ const initialState = {
 const usersSlice = createSlice({
   name: reducerPrefix,
   initialState,
-  reducers: {},
+  reducers: {
+    LOAD_USER_LOADING: (state) => {
+      state.status = loadUsersStatus.LOADING;
+    },
+    LOAD_USER_SUCCESS: (state, { payload }) => {
+      state.users = {
+        ...state.users,
+        [`user-${payload.id}`]: payload,
+      };
+      state.status = loadUsersStatus.SUCCESS;
+    },
+    LOAD_USER_ERROR: (state, action) => {
+      state.status = loadUsersStatus.ERROR;
+      state.errorMessage = action.payload;
+    },
+  },
 });
 
-export const { LOAD_POSTS_LOADING, LOAD_POSTS_SUCCESS, LOAD_POSTS_ERROR } =
+export const { LOAD_USER_LOADING, LOAD_USER_SUCCESS, LOAD_USER_ERROR } =
   usersSlice.actions;
 export default usersSlice.reducer;

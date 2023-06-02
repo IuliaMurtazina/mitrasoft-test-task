@@ -8,6 +8,9 @@ import commentsReducer, {
 import postsReducer, {
   reducerPrefix as POSTS_REDUCER_PREFIX,
 } from "./reducers/posts";
+import usersReducer, {
+  reducerPrefix as USERS_REDUCER_PREFIX,
+} from "./reducers/users";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -16,6 +19,7 @@ const store = configureStore({
     [UI_REDUCER_PREFIX]: uiReducer,
     [POSTS_REDUCER_PREFIX]: postsReducer,
     [COMMENTS_REDUCER_PREFIX]: commentsReducer,
+    [USERS_REDUCER_PREFIX]: usersReducer,
   },
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware(),

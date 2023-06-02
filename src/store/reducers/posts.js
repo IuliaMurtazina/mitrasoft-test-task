@@ -5,6 +5,8 @@ export const reducerPrefix = "posts";
 // ACTIONS
 
 export const loadPosts = createAction(`${reducerPrefix}/LOAD_POSTS`);
+export const searchPosts = createAction(`${reducerPrefix}/SEARCH_POSTS`);
+export const sortPosts = createAction(`${reducerPrefix}/SORT_POSTS`);
 
 // REDUCER
 
@@ -17,8 +19,10 @@ export const loadPostsStatus = {
 const initialState = {
   allPosts: [],
   userPosts: {},
+  filteredPosts: [],
   status: "",
   errorMessage: "",
+  isSearching: false,
 };
 
 const postsSlice = createSlice({
@@ -43,9 +47,51 @@ const postsSlice = createSlice({
       state.status = loadPostsStatus.ERROR;
       state.errorMessage = action.payload;
     },
+    FILTER_POSTS: (state, action) => {
+      state.isSearching = true;
+      const filteredPosts = state.allPosts.filter((post) =>
+        post.title.includes(action.payload.trim()),
+      );
+      state.filteredPosts = filteredPosts;
+
+      if (state.filteredPosts.length !== 0) {
+        state.status = loadPostsStatus.SUCCESS;
+      } else {
+        state.status = loadPostsStatus.ERROR;
+        state.errorMessage = "Не удалось найти посты";
+      }
+    },
+    CLEAR_FILTERED_POSTS: (state) => {
+      state.isSearching = false;
+      state.filteredPosts = [];
+    },
+    SORTING_POSTS: (state, action) => {
+      let posts = state.isSearching ? state.filteredPosts : state.allPosts;
+      const sorted = posts.sort((a, b) => a.title.localeCompare(b.title));
+
+      if (posts.length === 0) {
+        state.status = loadPostsStatus.ERROR;
+        state.errorMessage = "Не удалось найти посты";
+        return;
+      }
+
+      if (action.payload === "increase") {
+        posts = sorted;
+      } else if (action.payload === "decrease") {
+        posts = sorted.reverse();
+      }
+
+      state.status = loadPostsStatus.SUCCESS;
+    },
   },
 });
 
-export const { LOAD_POSTS_LOADING, LOAD_POSTS_SUCCESS, LOAD_POSTS_ERROR } =
-  postsSlice.actions;
+export const {
+  LOAD_POSTS_LOADING,
+  LOAD_POSTS_SUCCESS,
+  LOAD_POSTS_ERROR,
+  FILTER_POSTS,
+  CLEAR_FILTERED_POSTS,
+  SORTING_POSTS,
+} = postsSlice.actions;
 export default postsSlice.reducer;

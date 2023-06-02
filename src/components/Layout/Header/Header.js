@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Stack } from "react-bootstrap";
 import { List } from "react-bootstrap-icons";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import BurgerMenu from "../../BurgerMenu/BurgerMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_MENU_CLOSE, SET_MENU_OPEN } from "../../store/reducers/ui";
+import { SET_MENU_CLOSE, SET_MENU_OPEN } from "../../../store/reducers/ui";
 
 const Header = () => {
   const showMenu = useSelector((state) => state.ui.isMenuOpen);
