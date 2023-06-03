@@ -39,7 +39,9 @@ const SearchBar = () => {
           ref={searchInputRef}
           onChange={clearInputHandler}
         />
-        <Button type="submit">Search</Button>
+        <Button type="submit" className="btn-secondary">
+          Search
+        </Button>
       </Form>
       <div className="col-12 col-md-6">
         <Form.Select onChange={sortPostshandler}>

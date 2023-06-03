@@ -6,11 +6,13 @@ import {
   loadUser,
 } from "../reducers/users";
 import axiosInstance from "../../axiosInstance";
+import { SET_PAGE } from "../reducers/posts";
 
 // WORKERS
 
 function* loadUserWorker({ payload }) {
   try {
+    yield put(SET_PAGE(1));
     yield put(LOAD_USER_LOADING());
     const { data } = yield call(() => axiosInstance.get(`users/${payload}`));
     yield delay(500);

@@ -23,6 +23,9 @@ const initialState = {
   status: "",
   errorMessage: "",
   isSearching: false,
+  isSorting: false,
+  currentPage: 1,
+  objectsPerPage: 10,
 };
 
 const postsSlice = createSlice({
@@ -50,7 +53,7 @@ const postsSlice = createSlice({
     FILTER_POSTS: (state, action) => {
       state.isSearching = true;
       const filteredPosts = state.allPosts.filter((post) =>
-        post.title.includes(action.payload.trim()),
+        post.title.includes(action.payload.toLowerCase().trim()),
       );
       state.filteredPosts = filteredPosts;
 
@@ -60,12 +63,15 @@ const postsSlice = createSlice({
         state.status = loadPostsStatus.ERROR;
         state.errorMessage = "Не удалось найти посты";
       }
+      state.currentPage = 1;
     },
     CLEAR_FILTERED_POSTS: (state) => {
       state.isSearching = false;
       state.filteredPosts = [];
+      state.currentPage = 1;
     },
     SORTING_POSTS: (state, action) => {
+      state.isSorting = true;
       let posts = state.isSearching ? state.filteredPosts : state.allPosts;
       const sorted = posts.sort((a, b) => a.title.localeCompare(b.title));
 
@@ -82,6 +88,14 @@ const postsSlice = createSlice({
       }
 
       state.status = loadPostsStatus.SUCCESS;
+      state.currentPage = 1;
+      console.log(current(state));
+    },
+    CLEAR_SORTING_POSTS: (state) => {
+      state.isSorting = false;
+    },
+    SET_PAGE: (state, action) => {
+      state.currentPage = action.payload;
     },
   },
 });
@@ -93,5 +107,7 @@ export const {
   FILTER_POSTS,
   CLEAR_FILTERED_POSTS,
   SORTING_POSTS,
+  CLEAR_SORTING_POSTS,
+  SET_PAGE,
 } = postsSlice.actions;
 export default postsSlice.reducer;

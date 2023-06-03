@@ -2,7 +2,7 @@ import React from "react";
 import { Offcanvas, Stack } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { SET_MENU_CLOSE } from "../../store/reducers/ui";
+import { SET_MENU_CLOSE } from "../../../store/reducers/ui";
 
 const BurgerMenu = ({ showMenu, onHide }) => {
   const dispatch = useDispatch();

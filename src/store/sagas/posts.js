@@ -1,5 +1,5 @@
 import axiosInstance from "../../axiosInstance";
-import { call, takeEvery, put, delay } from "redux-saga/effects";
+import { call, takeEvery, put, delay, select } from "redux-saga/effects";
 import {
   FILTER_POSTS,
   LOAD_POSTS_ERROR,
@@ -16,6 +16,7 @@ import {
 function* loadPostsWorker({ payload }) {
   try {
     yield put(LOAD_POSTS_LOADING());
+    yield delay(500);
     const { data } = yield call(() =>
       axiosInstance.get("posts", {
         params: {
@@ -23,7 +24,6 @@ function* loadPostsWorker({ payload }) {
         },
       }),
     );
-    yield delay(500);
     yield put(LOAD_POSTS_SUCCESS({ posts: data, userId: payload?.userId }));
   } catch (error) {
     yield delay(500);

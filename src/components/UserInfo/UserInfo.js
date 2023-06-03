@@ -5,8 +5,7 @@ import { loadUsersStatus } from "../../store/reducers/users";
 
 const UserInfo = ({ user }) => {
   const { status, errorMessage } = useSelector((state) => state.users);
-
-  console.log(user);
+  
   return (
     <>
       {/* {status === loadUsersStatus.LOADING && <Spinner className="mx-auto"/>} */}

@@ -1,14 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostItem from "./PostItem";
-import { Spinner, Stack } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { loadPostsStatus } from "../../store/reducers/posts";
+import { Stack, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_PAGE, loadPostsStatus } from "../../store/reducers/posts";
+import { PaginationControl } from "react-bootstrap-pagination-control";
 
 const PostsList = ({ posts }) => {
-  const { status, errorMessage, filteredPosts, isSearching } = useSelector(
-    (state) => state.posts,
-  );
-  const postsToShow = isSearching ? filteredPosts : posts;
+  const {
+    status,
+    errorMessage,
+    filteredPosts,
+    isSearching,
+    currentPage,
+    objectsPerPage,
+  } = useSelector((state) => state.posts);
+  const dispatch = useDispatch();
+
+  const indexOfLastObject = currentPage * objectsPerPage;
+  const indexOfFirstObject = indexOfLastObject - objectsPerPage;
+  
+  const [postsLength, setPostsLength] = useState(0);
+  const [postsToShow, setPostsToShow] = useState([]);
+
+  useEffect(() => {
+    if (isSearching) {
+      setPostsLength(filteredPosts?.length || 0);
+      setPostsToShow(
+        filteredPosts?.slice(indexOfFirstObject, indexOfLastObject) || [],
+      );
+    } else {
+      setPostsLength(posts?.length || 0);
+      setPostsToShow(posts?.slice(indexOfFirstObject, indexOfLastObject) || []);
+    }
+  }, [
+    isSearching,
+    filteredPosts,
+    posts,
+    indexOfFirstObject,
+    indexOfLastObject,
+  ]);
 
   return (
     <>
@@ -28,6 +58,18 @@ const PostsList = ({ posts }) => {
               body={post.body}
             />
           ))}
+          {postsLength > objectsPerPage && (
+            <PaginationControl
+              page={currentPage}
+              between={4}
+              total={postsLength}
+              limit={objectsPerPage}
+              changePage={(page) => {
+                dispatch(SET_PAGE(page));
+              }}
+              ellipsis={4}
+            />
+          )}
         </Stack>
       )}
       {status === loadPostsStatus.ERROR && (
