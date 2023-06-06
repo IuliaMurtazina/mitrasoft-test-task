@@ -1,8 +1,8 @@
 {
   "name": "react-complete-guide",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://iuliamurtazina.github.io/",
+  "private": false,
+  "homepage": "https://iuliamurtazina.github.io/mitrasoft-test-task",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
