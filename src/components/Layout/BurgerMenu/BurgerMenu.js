@@ -20,7 +20,7 @@ const BurgerMenu = ({ showMenu, onHide }) => {
             Список постов
           </Link>
           <Link
-            to="/"
+            to="/about-me"
             className="text-dark text-decoration-none fs-5"
             onClick={closeMenuhandler}
           >

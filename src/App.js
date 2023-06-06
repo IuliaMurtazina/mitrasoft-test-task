@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import HomePage from "./pages/Home";
 import UserPage from "./pages/User";
+import AboutMePage from "./pages/AboutMe";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -18,6 +19,7 @@ const App = () => {
           element: <HomePage />,
         },
         { path: "user/:userId", element: <UserPage /> },
+        { path: "about-me", element: <AboutMePage /> },
       ],
     },
   ]);
