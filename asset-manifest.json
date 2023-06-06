@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mitrasoft-test-task/static/css/main.10525a1f.css",
+    "main.js": "/mitrasoft-test-task/static/js/main.504646a8.js",
+    "index.html": "/mitrasoft-test-task/index.html",
+    "main.10525a1f.css.map": "/mitrasoft-test-task/static/css/main.10525a1f.css.map",
+    "main.504646a8.js.map": "/mitrasoft-test-task/static/js/main.504646a8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.10525a1f.css",
+    "static/js/main.504646a8.js"
+  ]
+}
