@@ -14,7 +14,7 @@ import AboutMePage from "./pages/AboutMe";
 const App = () => {
   const router = createHashRouter([
     {
-      path: "/mitrasoft-test-task",
+      path: "/",
       element: <RootLayout />,
       children: [
         {
