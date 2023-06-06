@@ -12,7 +12,7 @@ const UserInfo = ({ user }) => {
       {user && (
         <Stack direction="horizontal" gap={3} className="mx-auto">
           <img
-            src="/img/user.png"
+            src="img/user.png"
             alt="User"
             style={{ width: 80, height: 80 }}
             className="rounded"

@@ -38,7 +38,7 @@ const AboutMePage = () => {
       </ul>
       <p>
         С портфолио можно ознакомиться на GitHub :{" "}
-        <Link to="https://github.com/IuliaMurtazina">
+        <Link to="https://github.com/IuliaMurtazina" target="_blank">
           https://github.com/IuliaMurtazina
         </Link>
       </p>
