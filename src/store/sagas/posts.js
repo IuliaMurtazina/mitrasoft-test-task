@@ -1,5 +1,5 @@
 import axiosInstance from "../../axiosInstance";
-import { call, takeEvery, put, delay, select } from "redux-saga/effects";
+import { call, takeEvery, put, delay } from "redux-saga/effects";
 import {
   FILTER_POSTS,
   LOAD_POSTS_ERROR,

@@ -1,4 +1,4 @@
-import { createSlice, current, createAction } from "@reduxjs/toolkit";
+import { createSlice, createAction } from "@reduxjs/toolkit";
 
 export const reducerPrefix = "ui";
 

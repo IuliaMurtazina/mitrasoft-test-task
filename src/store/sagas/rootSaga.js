@@ -1,4 +1,4 @@
-import { all, fork, spawn, call } from "redux-saga/effects";
+import { all, spawn, call } from "redux-saga/effects";
 import postsWatcher from "./posts";
 import commentsWatcher from "./comments";
 import uiWatcher from "./ui";

@@ -3,8 +3,6 @@ import { Stack, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import {
   CLEAR_FILTERED_POSTS,
-  SEARCH_POSTS,
-  SORT_POSTS_SUCCESS,
   searchPosts,
   sortPosts,
 } from "../../store/reducers/posts";

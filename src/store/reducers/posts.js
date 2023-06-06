@@ -1,4 +1,4 @@
-import { createSlice, createAction, current } from "@reduxjs/toolkit";
+import { createSlice, createAction } from "@reduxjs/toolkit";
 
 export const reducerPrefix = "posts";
 
@@ -89,7 +89,6 @@ const postsSlice = createSlice({
 
       state.status = loadPostsStatus.SUCCESS;
       state.currentPage = 1;
-      console.log(current(state));
     },
     CLEAR_SORTING_POSTS: (state) => {
       state.isSorting = false;

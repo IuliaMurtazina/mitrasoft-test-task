@@ -1,4 +1,7 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createHashRouter,
+} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import RootLayout from "./pages/Root";
@@ -9,7 +12,7 @@ import UserPage from "./pages/User";
 import AboutMePage from "./pages/AboutMe";
 
 const App = () => {
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       path: "/",
       element: <RootLayout />,
